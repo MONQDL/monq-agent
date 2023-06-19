@@ -51,7 +51,7 @@ jobs:
         run: |
           helm package charts/${{ env.IMAGE_NAME }}/ --app-version ${{ github.ref_name }} --version ${{ github.ref_name }}
           helm registry login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          helm push ${{ env.IMAGE_NAME }}-${{ github.ref_name }}.tgz oci://${{ env.REGISTRY }}/helm-charts
+          helm push ${{ env.IMAGE_NAME }}-${{ github.ref_name }}.tgz oci://${{ env.REGISTRY }}/monq-agent
           helm registry logout ${{ env.REGISTRY }}
 
       - name: Generate changelog
