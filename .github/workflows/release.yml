@@ -74,6 +74,4 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
             
             Installation:
-            `helm upgrade --install monq-agent monq-agent \
-            --repo https://github.io/MONQDL/monq-agent \
-            --namespace monq --create-namespace`
+            `helm upgrade --install monq-agent monq-agent --repo https://github.io/MONQDL/monq-agent --namespace monq --create-namespace`

@@ -12,7 +12,7 @@ Once Helm is set up properly, install the latest version of chart with the relea
 
 ```console
 kubectl create namespace monq
-helm install monq-agent -n monq oci://ghcr.io/MONQDL/helm-charts/monq-agent \
+helm upgrade --install monq-agent monq-agent --repo https://github.io/MONQDL/monq-agent --namespace monq --create-namespace \
 --set config.baseUri="https://monq.mydomain.com" --set config.apiKey="<my coordinator key>"
 ```
 
