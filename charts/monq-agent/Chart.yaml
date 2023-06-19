@@ -1,6 +1,0 @@
-apiVersion: v2
-name: monq-agent
-description: Helm chart to install monq-agent
-type: application
-home: https://monq.ru
-version: 1.0.0
