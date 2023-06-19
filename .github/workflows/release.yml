@@ -44,6 +44,16 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Package and push helm
+        run: |
+          helm package charts/${{ env.IMAGE_NAME }}/ --app-version ${{ github.ref_name }} --version ${{ github.ref_name }}
+          helm registry login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          helm push ${{ env.IMAGE_NAME }}-${{ github.ref_name }}.tgz oci://${{ env.REGISTRY }}/helm-charts
+          helm registry logout ${{ env.REGISTRY }}
+
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
