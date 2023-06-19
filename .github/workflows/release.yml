@@ -1,0 +1,71 @@
+---
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  REGISTRY: ghcr.io/MONQDL
+  IMAGE_NAME: monq-agent
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Package and push helm
+        run: |
+          helm package charts/${{ env.IMAGE_NAME }}/ --app-version ${{ github.ref_name }} --version ${{ github.ref_name }}
+          helm registry login ${{ env.REGISTRY }} -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+          helm push ${{ env.IMAGE_NAME }}-${{ github.ref_name }}.tgz oci://${{ env.REGISTRY }}/helm-charts
+          helm registry logout ${{ env.REGISTRY }}
+
+      - name: Generate changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v4.1.0
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.IMAGE_NAME }} v${{ github.ref_name }}
+          body: |
+            Changes in this Release:
+            ${{ steps.changelog.outputs.changelog }}
+            
+            Installation:
+            `helm install ${{ env.IMAGE_NAME }} oci://${{ env.REGISTRY }}/helm-charts/${{ env.IMAGE_NAME }} --version ${{ github.ref_name }}`
