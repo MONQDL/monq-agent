@@ -3,5 +3,5 @@ name: monq-agent
 description: Helm chart to install monq-agent
 type: application
 home: https://monq.ru
-version: 1.0.1
-appVersion: 1.0.1
+version: 1.0.2
+appVersion: 1.0.2
