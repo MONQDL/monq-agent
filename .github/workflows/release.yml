@@ -67,5 +67,4 @@ jobs:
           name: ${{ env.IMAGE_NAME }} v${{ github.ref_name }}
           body: |
             Installation:
-            `helm repo add monq-agent https://monqdl.github.io/monq-agent`
-            `helm upgrade --install ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }} --repo https://github.io/${{ env.ORG }}/${{ env.IMAGE_NAME }} --namespace monq --create-namespace`
+            `helm upgrade --install ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }} --repo https://${{ env.ORG }}.github.io/${{ env.IMAGE_NAME }} --namespace monq --create-namespace`
