@@ -8,7 +8,7 @@ on:
 
 env:
   ORG: MONQDL
-  REGISTRY: ghcr.io/MONQDL
+  REGISTRY: ghcr.io/monqdl
   IMAGE_NAME: monq-agent
 
 jobs:

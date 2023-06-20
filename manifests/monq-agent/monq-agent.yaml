@@ -109,7 +109,7 @@ spec:
       serviceAccountName: monq-agent
       containers:
         - name: monq-agent
-          image: "ghcr.io/MONQDL/monq-agent:latest"
+          image: "ghcr.io/monqdl/monq-agent:latest"
           imagePullPolicy: IfNotPresent
           args:
             - "--config"
