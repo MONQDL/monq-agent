@@ -13,9 +13,7 @@
 ```console
 kubectl create namespace monq
 
-helm repo add monq-agent https://monqdl.github.io/monq-agent
-
-helm install monq-agent -n monq oci://acureio.azurecr.io/charts/monq-agent \
+helm upgrade --install monq-agent monq-agent --repo https://monqdl.github.io/monq-agent --namespace monq \
 --set config.baseUri="https://monq.mydomain.com" --set config.apiKey="<my coordinator key>"
 ```
 
@@ -48,6 +46,6 @@ helm delete monq-agent -n monq
 | `imagePullSecrets`          | list   | `[]`                           | Необязательный массив imagePullSecrets, содержащий учетные данные для доступа к закрытому реестру образов # Справка: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | `resources.limits.cpu`      | string | `nil`                          | Лимит использования ЦПУ                                                                                                                                                                                    |
 | `resources.limits.memory`   | string | `nil`                          | Лимит использования памяти                                                                                                                                                                                 |
-| `resources.requests.cpu`    | string | `100m`                         | Запрашиваемые ресурсы ЦПУ                                                                                                                                                                                  |
-| `resources.requests.memory` | string | `128Mi`                        | Запрашиваемые ресурсы памяти                                                                                                                                                                               |
+| `resources.requests.cpu`    | string | `250m`                         | Запрашиваемые ресурсы ЦПУ                                                                                                                                                                                  |
+| `resources.requests.memory` | string | `256Mi`                        | Запрашиваемые ресурсы памяти                                                                                                                                                                               |
 | `nodeSelector `             | object | `{"kubernetes.io/os":"linux"}` | Метки `nodeSelector` для распределения пода на ноде # Справка: https://kubernetes.io/docs/user-guide/node-selection/ #                                                                                     |
