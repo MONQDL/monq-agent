@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   monq-agent:
   - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2024-03-18T09:33:59.982035908Z"
+    description: Helm chart to install monq-agent
+    digest: dd39527ee2e8a71b23b6e93fb948f1bb7b835ccdfc7b05f5741d62b2fdc99fcf
+    home: https://monq.ru
+    name: monq-agent
+    type: application
+    urls:
+    - https://github.com/MONQDL/monq-agent/releases/download/monq-agent-2.0.0/monq-agent-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
     appVersion: 1.0.2
     created: "2023-06-20T12:34:21.149822189Z"
     description: Helm chart to install monq-agent
@@ -23,4 +34,4 @@ entries:
     urls:
     - https://github.com/MONQDL/monq-agent/releases/download/monq-agent-1.0.1/monq-agent-1.0.1.tgz
     version: 1.0.1
-generated: "2023-06-20T12:34:21.149828589Z"
+generated: "2024-03-18T09:33:59.982051086Z"
