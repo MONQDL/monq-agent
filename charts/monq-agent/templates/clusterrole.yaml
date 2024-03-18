@@ -7,6 +7,7 @@ metadata:
 rules:
 - apiGroups: [""]
   resources:
+  - namespaces
   - nodes
   - pods
   - persistentvolumes
