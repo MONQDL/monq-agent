@@ -1,8 +1,6 @@
 FROM debian:bullseye-slim AS downloader
 
-ADD https://downloads.monq.ru/tools/monq-agent/v2.0.0/linux-x64/monq-agent.zip /tmp/
-ADD https://downloads.monq.ru/agent-plugins/k8sMetricsDataFlow/v2.0.0/k8sMetricsDataFlow.zip /tmp/plugins/
-ADD https://downloads.monq.ru/agent-plugins/k8sTopologySync/v2.0.0/k8sTopologySync.zip /tmp/plugins/
+ADD https://downloads.monq.ru/tools/monq-agent/v2.2.0/linux-x64/monq-agent.zip /tmp/
 
 RUN apt-get update && \
     apt-get -y install unzip && \

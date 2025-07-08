@@ -19,10 +19,11 @@ data:
     BaseUri=$MONQ_URI
     ApiKey=$MONQ_KEY
     FileStorage=""
-    Timeout=100
+    Timeout=120
     
     [Plugins]
     CSharpPath="plugins"
+    Autoload=true
     
     [Connection]
     Timeout=100
@@ -110,7 +111,7 @@ spec:
       serviceAccountName: monq-agent
       containers:
         - name: monq-agent
-          image: "ghcr.io/monqdl/monq-agent:latest"
+          image: "ghcr.io/monqdl/monq-agent:2.2.0"
           imagePullPolicy: IfNotPresent
           args:
             - "--config"
