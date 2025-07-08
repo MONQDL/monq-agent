@@ -19,6 +19,8 @@ config:
   retryCount: 10
   # Number of executers
   slotsCount: 2
+  # Enable autoload plugins
+  autoload: true
 
 replicas: 1
 
